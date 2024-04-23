@@ -240,6 +240,7 @@
     color: black;
   } */
   #start {
+    color: black;
     background-color: rgba(255, 255, 255, 0.384);
   }
   .controls-container button {
