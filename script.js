@@ -11,7 +11,7 @@ let firstCard = false;
 let secondCard = false;
 const width = document.documentElement.clientWidth;
 
-//Items array
+//อาเรย์หน้าการ์ด
 const items = [
   { name: "coal", image: "Card/coal.png" },
   { name: "iron", image: "Card/iron.png" },
@@ -24,46 +24,46 @@ const items = [
   { name: "dirt", image: "Card/dirt.png" },
 ];
 
-//Initial Time
+//ค่าเริ่มต้นเวลา ,การนับการจับคู่, คะแนน
 let seconds = 0,
   minutes = 0;
-//Initial moves and win count
+
 let movesCount = 0,
   winCount = 0;
 
-//For timer
+//เวลา
 const timeGenerator = () => {
   seconds += 1;
-  //minutes logic
+  //ถ้าครบ 60 วิจะเป็น 1 นาที
   if (seconds >= 60) {
     minutes = 1;
     seconds = 0;
   }
-  //format time before displaying
+  //จัดรูปเวลาก่อนแสดงผล
   let secondsValue = seconds < 10 ? `0${seconds}` : seconds;
   let minutesValue = minutes < 10 ? `0${minutes}` : minutes;
   timeValue.innerHTML = `<span>Time:</span>${minutesValue}:${secondsValue}`;
 };
 
-//For calculating moves
+//คำนวณจำนวนการจับคู่ กด 2 ใบเพิ่ม 1 ครั้ง
 const movesCounter = () => {
   movesCount += 1;
   moves.innerHTML = `<span>Moves:</span>${movesCount}`;
 };
 
-//Pick random objects from the items array
+//ฟังก์ชันสุ่มหน้าการ์ด
 const generateRandom = (size = 4) => {
-  //temporary array
+  //ดึงข้อมูลหน้าการ์ดจากอาเรย์
   let tempArray = [...items];
-  //initializes cardValues array
+  //ประกาศอาเรย์เก็บคู่หน้าการ์ด
   let cardValues = [];
-  //size should be double (4*4 matrix)/2 since pairs of objects would exist
+  //ทำให้หน้าการ์ดเป็นคู่ๆ ขนาดควรเป็นสองเท่า (4*4)/2 
   size = (size * size) / 2;
-  //Random object selection
+  //ระบบสุ่มหน้าการ์ด
   for (let i = 0; i < size; i++) {
     const randomIndex = Math.floor(Math.random() * tempArray.length);
     cardValues.push(tempArray[randomIndex]);
-    //once selected remove the object from temp array
+    //เอาค่าออกจากอาเรย์ชั่วคราว
     tempArray.splice(randomIndex, 1);
   }
   return cardValues;
@@ -72,14 +72,14 @@ const generateRandom = (size = 4) => {
 const matrixGenerator = (cardValues, size = 4) => {
   gameContainer.innerHTML = "";
   cardValues = [...cardValues, ...cardValues];
-  //simple shuffle
+  //สุ่มตำแหน่งการ์ด
   cardValues.sort(() => Math.random() - 0.5);
   for (let i = 0; i < size * size; i++) {
     /*
-        Create Cards
-        before => front side (contains question mark)
-        after => back side (contains actual image);
-        data-card-values is a custom attribute which stores the names of the cards to match later
+        สร้างการ์ด1การ์ด
+        before หลังการ์ด => front side หน้าการ์ด
+        after หน้าการ์ด => back side หลังการ์ด
+        data-card-values ในคำสั่งจัดเก็บหน้าการ์ดที่เป็นคู่กันไว้ แต่ในโค้ดจะใช้เก็บการ์ดที่เลือกในภายหลัง
       */
     gameContainer.innerHTML += `
      <div class="card-container" data-card-value="${cardValues[i].name}">
@@ -94,43 +94,41 @@ const matrixGenerator = (cardValues, size = 4) => {
   //Grid
   gameContainer.style.gridTemplateColumns = `repeat(${size},auto)`;
 
-  //Cards
+  //ตรวจสอบการ์ดว่าจับคู่ได้ถูกต้อง
   cards = document.querySelectorAll(".card-container");
   cards.forEach((card) => {
     card.addEventListener("click", () => {
-      //If selected card is not matched yet then only run (i.e already matched card when clicked would be ignored)
+      //ถ้าการ์ดที่เลือกไม่ตรงกัน จะเรียกใช้ (การ์ดที่จับคู่แล้วเมื่อคลิกจะไม่เกิดอะไร)
       if (!card.classList.contains("matched")) {
-        //flip the cliked card
+        //หมุนการ์ดเมื่อคลิก
         card.classList.add("flipped");
-        //if it is the firstcard (!firstCard since firstCard is initially false)
+        //ตรวจสอบการ์ดใบแรก
         if (!firstCard) {
-          //so current card will become firstCard
+          //การ์ดปัจจุบันจะเป็นใบแรกเสมอ
           firstCard = card;
-          //current cards value becomes firstCardValue
           firstCardValue = card.getAttribute("data-card-value");
         } else {
-          //increment moves since user selected second card
+          //เมื่อเลือกใบที่2
           movesCounter();
-          //secondCard and value
           secondCard = card;
           let secondCardValue = card.getAttribute("data-card-value");
           if (firstCardValue == secondCardValue) {
-            //if both cards match add matched class so these cards would beignored next time
+            //ถ้าการ์ด1และ2ตรงกันเพิ่ม class matched ให้ละจะไม่สามารถกดได้ เนื่องจากโค้ด บรรทัดที่ 102
             firstCard.classList.add("matched");
             secondCard.classList.add("matched");
-            //set firstCard to false since next card would be first now
+            //ให้ใบแรกเป็น false เนื่องจากใบถัดไปจะเป็นใบแรกในตอนนี้
             firstCard = false;
-            //winCount increment as user found a correct match
+            //จะเพิ่มเมื่อเจอคู่การ์ดที่ถูกต้อง
             winCount += 1;
-            //check if winCount ==half of cardValues
+            //ตรวจสอบว่า คะแนนชนะ เท่ากับ ครึ่งหนึ่งของ length
             if (winCount == Math.floor(cardValues.length / 2)) {
               result.innerHTML = `<h2>You Won</h2>
             <h4>Moves: ${movesCount}</h4>`;
               stopGame();
             }
           } else {
-            //if the cards dont match
-            //flip the cards back to normal
+            //ถ้าการ์ดไม่ตรง
+            //หมุนกลับไปเป็นด้านหลังการ์ด
             let [tempFirst, tempSecond] = [firstCard, secondCard];
             firstCard = false;
             secondCard = false;
@@ -145,23 +143,24 @@ const matrixGenerator = (cardValues, size = 4) => {
   });
 };
 
-//Start game
+//ปุ่มเริ่มเกม
+//ควบคุมการมองเห็นของปุ่ม เมื่อกดเริ่ม ปุ่มหยุดจะปรากฎ
 startButton.addEventListener("click", () => {
   movesCount = 0;
   seconds = 0;
   minutes = 0;
-  //controls amd buttons visibility
   controls.classList.add("hide");
   stopButton.classList.remove("hide");
   startButton.classList.add("hide");
-  //Start timer
+  //เริ่มนับเวลา
   interval = setInterval(timeGenerator, 1000);
-  //initial moves
+  //นับการจับคู่การ์ด
   moves.innerHTML = `<span>Moves:</span> ${movesCount}`;
   initializer();
 });
 
-//Stop game
+//ปุ่มปิดเกม
+//ควบคุมการมองเห็นของปุ่ม เมื่อกดหยุด ปุ่มเริ่มจะปรากฎ
 stopButton.addEventListener(
   "click",
   (stopGame = () => {
@@ -172,7 +171,7 @@ stopButton.addEventListener(
   })
 );
 
-//Initialize values and func calls
+//ค่าเริ่มต้น
 const initializer = () => {
   result.innerText = "";
   winCount = 0;
