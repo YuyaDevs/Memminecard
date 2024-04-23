@@ -149,6 +149,7 @@ startButton.addEventListener("click", () => {
   movesCount = 0;
   seconds = 0;
   minutes = 0;
+  gameContainer.classList.remove("hide");
   controls.classList.add("hide");
   stopButton.classList.remove("hide");
   startButton.classList.add("hide");
@@ -167,6 +168,7 @@ stopButton.addEventListener(
     controls.classList.remove("hide");
     stopButton.classList.add("hide");
     startButton.classList.remove("hide");
+    gameContainer.classList.add("hide");
     clearInterval(interval);
   })
 );

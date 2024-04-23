@@ -9,49 +9,145 @@
     background-repeat: no-repeat;
   }
 
-  /* @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 799px) {
     .wrapper {
-
+      width: 345px;
+      height: 550px;
+      box-sizing: border-box;
+      position: absolute;
     }
     .game-container {
-
+      width: 50%;
+      height: 50%;
+      gap: 0.1em;
     }
-    .stats-container {
-
-    }
-
     .stats-container span {
-
+      width: 50%;
+      height: 50%;
     }
-
     .card-container {
-
-    }
-    .card-before,
-    .card-after {
-
-    }
-    .controls-container {
-
-    }
-    button {
-
-    }
-    .controls-container button {
-
+      position: center;
+      width: 1rem;
+      height: 1rem;
+      cursor: pointer;
+      transform: scale(0.4);
+      padding-left: 18.5px;
+      padding-right: 2px;
+      margin-top: 2rem;
+      margin-left: 0.5em;
+      transform-style: preserve-3d;
+      transition: transform 0.5s; 
     }
     #stop {
-
+      font-size: 1em;
+      display: block;
+      margin: 0 auto 20px auto;
+      margin-top: 100px;
+      background-color: white;
+      color: black;
     }
-    #result h2 {
+  }
 
+
+  @media only screen and (max-width: 799px) {
+      .card-container {
+        position: center;
+        width: 1rem;
+        height: 1rem;
+        cursor: pointer;
+        transform: scale(0.45);
+        padding-left: 18.5px;
+        padding-right: 1px;
+        margin-top: 2rem;
+        margin-left: 0.4rem;
+        transform-style: preserve-3d;
+        transition: transform 0.5s; 
+      }
+      #stop {
+        font-size: 1.1em;
+        display: block;
+        margin: 0 auto 20px auto;
+        margin-top: 150px;
+        background-color: white;
+        color: black;
+      }
     }
-    #result h4 {
 
+  @media only screen and (max-width: 0px) {
+      .wrapper {
+        width: 75%;
+        height: 80%
+      }
+      .game-container {
+        position: relative;
+        width: 100%;
+        display: grid;
+        gap: 10px;
+      }
+      .stats-container {
+        text-align: right;
+        margin-bottom: 10px;
+        color: rgba(255, 255, 255, 0.267);
+        /* background-color: rgba(0, 0, 0, 0.342); */
+        
+      }
+      .stats-container span {
+        font-weight: 600;
+      }
+      .card-container {
+        position: relative;
+        width: 6.25rem;
+        height: 6.25rem;
+        cursor: pointer;
+        transform: scale(1);
+        margin: 5px;
+        padding-left: 0;
+        padding-right: 0;
+        transform-style: preserve-3d;
+        transition: transform 0.5s; 
+      }
+      #stop {
+        font-size: 1.1em;
+        display: block;
+        margin: 0 auto 20px auto;
+        margin-top: 250px;
+        background-color: white;
+        color: black;
+      }
+  }
+
+  @media only screen and (min-width: 800px) {
+    .wrapper {
+      /* width: 30%; */
+      height: 80%
     }
+    .game-container {
+      position: relative;
+      display: grid;
+      gap: 45px;
+    }
+    .card-container {
+      position: relative;
+      width: 6.25rem;
+      height: 6.25rem;
+      cursor: pointer;
+      transform: scale(1);
+      margin: 5px;
+      padding-left: 0;
+      padding-right: 0;
+      transform-style: preserve-3d;
+      transition: transform 0.5s; 
+    }
+    #stop {
+      font-size: 1.1em;
+      display: block;
+      margin: 0 auto 20px auto;
+      margin-top: 80px;
+      background-color: white;
+      color: black;
+    }
+}
 
-  } */
-  
   .wrapper {
     box-sizing: border-box;
     position: absolute;
@@ -78,23 +174,23 @@
   .stats-container {
     text-align: right;
     margin-bottom: 10px;
-    color: white;
+    color: rgb(255, 251, 251);
     /* background-color: rgba(0, 0, 0, 0.342); */
     
   }
   .stats-container span {
     font-weight: 600;
   }
-  .card-container {
+  /* .card-container {
     position: relative;
-    width: 6.25em;
-    height: 6.25em;
+    width: 6.25rem;
+    height: 6.25rem;
     cursor: pointer;
     transform: scale(1);
     margin: 5px;
     transform-style: preserve-3d;
     transition: transform 0.5s; 
-  }
+  } */
   .card-before,
   .card-after {
     position: absolute;
@@ -127,7 +223,6 @@
     background-image: url("../Bg/bg-start.jpg");
     top: 0;
     background-position: center center;
-    background-repeat: no-repeat;
     background-size: cover;
   }
   button {
@@ -136,13 +231,16 @@
     padding: 1em 1.5em;
     cursor: pointer;
   }
-  #stop {
+  /* #stop {
     font-size: 1.1em;
     display: block;
     margin: 0 auto 20px auto;
     margin-top: 83px;
     background-color: white;
     color: black;
+  } */
+  #start {
+    background-color: rgba(255, 255, 255, 0.384);
   }
   .controls-container button {
     font-size: 1.3em;
