@@ -1,0 +1,163 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+  body {
+    background-image: url("../Bg/bg-game.jpg");
+    background-repeat: no-repeat;
+  }
+
+  /* @media only screen and (max-width: 600px) {
+    .wrapper {
+
+    }
+    .game-container {
+
+    }
+    .stats-container {
+
+    }
+
+    .stats-container span {
+
+    }
+
+    .card-container {
+
+    }
+    .card-before,
+    .card-after {
+
+    }
+    .controls-container {
+
+    }
+    button {
+
+    }
+    .controls-container button {
+
+    }
+    #stop {
+
+    }
+    #result h2 {
+
+    }
+    #result h4 {
+
+    }
+
+  } */
+  
+  .wrapper {
+    box-sizing: border-box;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 44%;
+    border-radius: 0.6em;
+    background-color: rgba(0, 0, 0, 0.507);
+    box-shadow: 0 0.9em 2.8em rgba(86, 66, 0, 0.2);
+    /* height: calc(33.333% - 10px);
+    width: calc(20% - 10px);
+    position: relative;
+    margin: 5px;
+    transform: scale(1);
+    transform-style: preserve-3d;
+    transition: transform .5s;  */
+  }
+  .game-container {
+    position: relative;
+    width: 100%;
+    display: grid;
+    gap: 45px;
+  }
+  .stats-container {
+    text-align: right;
+    margin-bottom: 10px;
+    color: white;
+    /* background-color: rgba(0, 0, 0, 0.342); */
+    
+  }
+  .stats-container span {
+    font-weight: 600;
+  }
+  .card-container {
+    position: relative;
+    width: 6.25em;
+    height: 6.25em;
+    cursor: pointer;
+    transform: scale(1);
+    margin: 5px;
+    transform-style: preserve-3d;
+    transition: transform .5s; 
+  }
+  .card-before,
+  .card-after {
+    position: absolute;
+    border-radius: 0.625rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.7s ease-out;
+    backface-visibility: hidden;
+  }
+  .card-after {
+    transform: rotateY(180deg);
+  }
+  .card-container.flipped .card-before {
+    transform: rotateY(180deg);
+  }
+  .card-container.flipped .card-after {
+    transform: rotateY(0deg);
+  }
+  .controls-container {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-image: url("../Bg/bg-start.jpg");
+    top: 0;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  button {
+    border: none;
+    border-radius: 0.3em;
+    padding: 1em 1.5em;
+    cursor: pointer;
+  }
+  #stop {
+    font-size: 1.1em;
+    display: block;
+    margin: 0 auto 20px auto;
+    margin-top: 83px;
+    background-color: white;
+    color: black;
+  }
+  .controls-container button {
+    font-size: 1.3em;
+    box-shadow: 0 0.6em 2em rgba(86, 66, 0, 0.2);
+  }
+  .hide {
+    display: none;
+  }
+  #result {
+    text-align: center;
+  }
+  #result h2 {
+    font-size: 2.5em;
+  }
+  #result h4 {
+    font-size: 1.8em;
+    margin: 0.6em 0 1em 0;
+  }
